@@ -18,6 +18,15 @@ You need to install `pdbfixer` and `openmm`.
 conda install -c conda-forge pdbfixer openmm
 ```
 
+### Run
+```bash
+pdbfixer "$pdb_file" \
+    --add-atoms=all \
+    --keep-heterogens=none \
+    --replace-nonstandard \
+    --output="$output_file"
+```
+
 ## Step 3: process files
 ```python
 python process_disorder_data.py \
