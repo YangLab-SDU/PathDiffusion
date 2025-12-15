@@ -16,7 +16,7 @@ Download the disordered protein ensembles from the IDRome repository:
 
 ## Step 2: Reconstruct Full-Atom Structures (PDBFixer)
 
-The raw structures from IDRome often contain only backbone atoms (CA) or have missing side-chains. We use **PDBFixer** to reconstruct full-atom representations. The force field parameters used for reconstruction are based on **ff14SB** [1].
+The raw structures from IDRome often contain only backbone atoms (CA) or have missing side-chains. We use **PDBFixer** to reconstruct full-atom representations.
 
 ### Prerequisites
 You need to install `pdbfixer` and `openmm`.
