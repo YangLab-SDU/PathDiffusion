@@ -44,7 +44,6 @@ Use eval.py to generate protein structures. The inference pipeline typically use
 ### Basic Command
 ```bash
 python eval.py \
-    experiment=clsfree_guide \
     sampling=cfg_inference \
     model.stage=inference \
     paths.output_dir="./output/inference_result" \
@@ -53,5 +52,9 @@ python eval.py \
     model.score_network.msta_dir="/path/to/msta_dir" \
     data.dataset.test_gen_dataset.csv_path="/path/to/test_data.csv"
 ```
-
-
+### Pipeline Automation
+For a complete pipeline (MSA generation -> Representation extraction -> Sampling -> Movie generation), you can use the scripts provided in the run/ directory.
+Example:
+```bash
+bash run/FPdiffusion.sh ./example 1AB7_A
+```
