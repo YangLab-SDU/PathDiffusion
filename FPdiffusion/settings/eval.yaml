@@ -1,0 +1,20 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - sampling: null 
+
+task_name: "eval"
+tags: ["dev", "eval"]
+
+paths:
+  output_dir: null
+  
+  log_dir: "${paths.output_dir}/logs"
+
+  guidance:
+    cond_ckpt: ""
+    uncond_ckpt: ""
+
+trainer: {}
+ckpt_path: null
