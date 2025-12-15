@@ -1,0 +1,74 @@
+# @package _global_
+
+defaults:
+  - train
+  - base_model@model 
+  - _self_
+
+task_name: "uncond_train"
+tags: ["dev"]
+
+trainer:
+  strategy: ddp
+  precision: 32
+  max_epochs: 200
+  inference_mode: True
+
+model:
+  stage: 2
+  score_network:
+    model_nn:
+      embedder:
+        pretrained_node_repr_size: 0
+        pretrained_edge_repr_size: 0
+
+data:
+  _target_: src.data.full_atom.datamodule.FullAtomDataModule
+  diffuser: ${model.diffuser}
+  train_batch_size: 1
+  gen_batch_size: 1
+  val_batch_size: 1
+  num_workers: 0
+  pin_memory: True
+  clustering_training: False
+  dynamic_batching: True
+
+  repr_loader: null
+  
+  dataset:
+    train_dataset:
+      _target_: src.data.full_atom.dataset.RCSBDataset
+      # Use interpolated variable paths
+      csv_path: ${paths.disorder.csv_path}
+      data_dir: ${paths.disorder.pdb_dir}
+      mode: "train"
+      disorder: true
+      csv_processor_cfg:
+        min_seqlen: 20
+        max_seqlen: 500
+        max_coil_ratio: 1
+        min_valid_frame_ratio: 0
+        groupby: cluster_70_id
+        latest_release_date: '2024-04-10'
+        # Use interpolated variable paths
+        apo_csv_path: ${paths.disorder.apo_csv_path}
+    
+    val_dataset:
+      _target_: src.data.full_atom.dataset.RCSBDataset
+      # Use interpolated variable paths
+      csv_path: ${paths.disorder.csv_path}
+      data_dir: ${paths.disorder.pdb_dir}
+      mode: "val"
+      disorder: true
+      csv_processor_cfg:
+        min_seqlen: 20
+        max_seqlen: 500
+        max_coil_ratio: 1
+        min_valid_frame_ratio: 0
+        groupby: cluster_70_id
+        earliest_release_date: '2024-04-11'
+        latest_release_date: '2025-04-16'
+
+    val_gen_dataset: null
+    
+    test_gen_dataset: null

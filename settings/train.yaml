@@ -1,0 +1,53 @@
+# @package _global_
+
+defaults:
+  - _self_
+
+task_name: "train_default"
+tags: ["dev"]
+train: True
+test: False
+compile: False
+ckpt_path: null
+load_state_dict_only: True
+seed: 42
+
+trainer: {}
+
+# =========================================================
+# Path Definitions
+# =========================================================
+paths:
+  # Root directories
+  root_dir: ${hydra:runtime.cwd}
+  data_root: "/path/to/your/dataset_root" # User modifies this ONE line
+  output_dir: "${paths.root_dir}/train_model"
+  log_dir: "${paths.output_dir}/logs"
+
+  # Checkpoints
+  guidance:
+    cond_ckpt: "${paths.root_dir}/weights/cond_model.ckpt"
+    uncond_ckpt: "${paths.root_dir}/weights/uncond_model.ckpt"
+
+  # Dataset: Disorder (for Unconditional Model)
+  disorder:
+    csv_path: "${paths.data_root}/disorder/disorder-test.csv"
+    pdb_dir: "${paths.data_root}/disorder/pdb"
+    apo_csv_path: "${paths.data_root}/apo/apo_metadata.csv"
+
+  # Dataset: RCSB/ESM (for Conditional Model)
+  rcsb:
+    metadata_csv: "${paths.data_root}/pdb_esm/rcsb_metadata-test.csv"
+    pdb_dir: "${paths.data_root}/pdb_esm/pdb_files"
+    msta_dir: "${paths.data_root}/pdb_esm/msta_files"
+  
+  esm:
+    repr_dir: "${paths.data_root}/pdb_esm/esm_repr"
+
+hydra:
+  run:
+    dir: ${paths.output_dir}/output/${task_name}/${now:%Y-%m-%d_%H-%M-%S}
+  job_logging:
+    handlers:
+      file:
+        filename: ${hydra.runtime.output_dir}/train.log
