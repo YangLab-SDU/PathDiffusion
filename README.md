@@ -17,12 +17,10 @@ pip install -e openfold
 conda install -c conda-forge -c bioconda mmseqs2
 ```
 
-### Training
-FPdiffusion consists of a **sequence-conditional model** and an **unconditional model**.
+## Training
+We use Hydra for configuration management. All configuration files are located in the settings/ directory.
 
-
-To train the **conditional model**:
-**Conditional Training (Fold-based)**:
+**1. Conditional Training (Fold-based)**:
 ```bash
 python train.py \
     --config-name cond_model \
@@ -30,15 +28,30 @@ python train.py \
     data.train_batch_size=1 \
     paths.output_dir="./train_model"
 ```
-The detailed training configuration can be found in `configs/experiment/full_atom.yaml`.
+The detailed training configuration can be found in `settings/cond_model.yaml`.
 
-**Conditional Training (Fold-based)**:
+**2. Unconditional Training (Disorder-based)**:
 ```bash
 python train.py \
     --config-name uncond_model \
     task_name=uncond_train \
-    data.train_batch_size=1 \
     paths.output_dir="./train_model"
 ```
-The detailed training configuration can be found in `configs/experiment/uncond.yaml`.
+The detailed training configuration can be found in `settings/uncond_model.yaml`.
+
+## Inference (Sampling)
+Use eval.py to generate protein structures. The inference pipeline typically uses Classifier-Free Guidance (CFG) combining both conditional and unconditional checkpoints.
+### Basic Command
+```bash
+python eval.py \
+    experiment=clsfree_guide \
+    sampling=cfg_inference \
+    model.stage=inference \
+    paths.output_dir="./output/inference_result" \
+    paths.guidance.cond_ckpt="/path/to/cond_model.ckpt" \
+    paths.guidance.uncond_ckpt="/path/to/uncond_model.ckpt" \
+    model.score_network.msta_dir="/path/to/msta_dir" \
+    data.dataset.test_gen_dataset.csv_path="/path/to/test_data.csv"
+```
+
 
