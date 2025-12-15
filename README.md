@@ -19,7 +19,7 @@ We train FPdiffusion using protein structures from the [Protein Data Bank](https
 The following datasets and pre-computed representations are required:
 1. RCSB PDB Dataset: See `datasets/rcsb` for details on downloading and processing structured proteins. Once prepared, specify the `csv_path` and `data_dir` in the configuration file `settings/cond_model.yaml`.
 2. MSA and MSTA Generation: After preparing the RCSB dataset, you must generate Multiple Sequence Alignments (MSA) and Multiple Structural Alignments (MSTA) for each protein. Scripts for this process are located in the `run/` directory. Once generated, specify the `msta_dir` in the configuration file `settings/cond_model.yaml`.
-3. ESMFold Representations: See pretrain_repr for details on extracting embeddings. Once prepared, specify the data_root in the configuration file `settings/cond_model.yaml`.
+3. ESMFold Representations: See `pretrain_repr` for details on extracting embeddings. Once prepared, specify the data_root in the configuration file `settings/cond_model.yaml`.
 4. Disordered Protein Dataset: See `datasets/disorder` for details on preparing the IDP dataset. Once prepared, specify the `csv_path` and `data_dir` in the configuration file `settings/uncond_model.yaml`.
 
 ## Training
