@@ -12,13 +12,18 @@ conda activate FPdiffusion
 # install openfold
 git clone https://github.com/aqlaboratory/openfold.git
 pip install -e openfold
-
-# install openfold
-conda install -c conda-forge -c bioconda mmseqs2
 ```
 
+## Datasets Preparation
+We train FPdiffusion using protein structures from the [Protein Data Bank](https://www.rcsb.org/) (for conditional generation) and the IDRome database (for unconditional generation). Details on dataset preparation can be found in the datasets folder.
+The following datasets and pre-computed representations are required:
+1. RCSB PDB Dataset: See `datasets/rcsb` for details on downloading and processing structured proteins. Once prepared, specify the `csv_path` and `data_dir` in the configuration file `settings/cond_model.yaml`.
+2. MSA and MSTA Generation: After preparing the RCSB dataset, you must generate Multiple Sequence Alignments (MSA) and Multiple Structural Alignments (MSTA) for each protein. Scripts for this process are located in the `run/` directory. Once generated, specify the `msta_dir` in the configuration file `settings/cond_model.yaml`.
+3. ESMFold Representations: See pretrain_repr for details on extracting embeddings. Once prepared, specify the data_root in the configuration file `settings/cond_model.yaml`.
+4. Disordered Protein Dataset: See `datasets/disorder` for details on preparing the IDP dataset. Once prepared, specify the `csv_path` and `data_dir` in the configuration file `settings/uncond_model.yaml`.
+
 ## Training
-We use Hydra for configuration management. All configuration files are located in the settings/ directory.
+We use Hydra for configuration management. All configuration files are located in the `settings/` directory.
 
 **1. Conditional Training (Fold-based)**:
 ```bash
@@ -45,7 +50,7 @@ Use eval.py to generate protein structures. The inference pipeline typically use
 ```bash
 python eval.py \
     sampling=cfg_inference \
-    model.stage=inference \
+    model.stage=1 \
     paths.output_dir="./output/inference_result" \
     paths.guidance.cond_ckpt="/path/to/cond_model.ckpt" \
     paths.guidance.uncond_ckpt="/path/to/uncond_model.ckpt" \
@@ -53,7 +58,7 @@ python eval.py \
     data.dataset.test_gen_dataset.csv_path="/path/to/test_data.csv"
 ```
 ### Pipeline Automation
-For a complete pipeline (MSA generation -> Representation extraction -> Sampling -> Movie generation), you can use the scripts provided in the run/ directory.
+For a complete pipeline (MSA and MSTA Generation -> ESM_repr Generation -> Folding Pathway Sampling -> Pathway Movie Generation), you can use the scripts provided in the `run/` directory.
 Example:
 ```bash
 bash run/FPdiffusion.sh ./example 1AB7_A
