@@ -15,7 +15,7 @@ pip install -e openfold
 ```
 
 ## Datasets Preparation
-We train FPdiffusion using protein structures from the [Protein Data Bank](https://www.rcsb.org/) (for conditional generation) and the IDRome database (for unconditional generation). Details on dataset preparation can be found in the datasets folder.
+We train PathDiffusion using protein structures from the [Protein Data Bank](https://www.rcsb.org/) (for conditional generation) and the IDRome database (for unconditional generation). Details on dataset preparation can be found in the datasets folder.
 The following datasets and pre-computed representations are required:
 1. RCSB PDB Dataset: See `datasets/rcsb` for details on downloading and processing structured proteins. Once prepared, specify the `csv_path` and `data_dir` in the configuration file `settings/cond_model.yaml`.
 2. MSA and MSTA Generation: After preparing the RCSB dataset, you must generate Multiple Sequence Alignments (MSA) and Multiple Structural Alignments (MSTA) for each protein. Scripts for this process are located in the `run/` directory. Once generated, specify the `msta_dir` in the configuration file `settings/cond_model.yaml`.
@@ -61,7 +61,7 @@ python eval.py \
 For a complete pipeline (MSA and MSTA Generation -> ESM_repr Generation -> Folding Pathway Sampling -> Pathway Movie Generation), you can use the scripts provided in the `run/` directory.
 Example:
 ```bash
-bash run/FPdiffusion.sh ./example 1AB7_A
+bash run/PathDiffusion.sh ./example 1AB7_A
 ```
 
 ## Contact
