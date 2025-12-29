@@ -1,6 +1,7 @@
 # PathDiffusion
-https://github.com/user-attachments/assets/0abdab58-d31b-486f-a550-650ef4576413
-https://github.com/user-attachments/assets/3f23083d-f295-48f7-8a66-b7994c823be9
+![lv_0_20251229211927](https://github.com/user-attachments/assets/9cf70878-bce9-4b5a-92fc-5d44c08c2e7d)
+![lv_0_20251229215126](https://github.com/user-attachments/assets/504e9590-7f01-40bc-b19a-694eef758129)
+
 
 ## Installation
 ```bash
