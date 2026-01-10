@@ -66,7 +66,7 @@ python eval.py \
     data.dataset.test_gen_dataset.csv_path="/path/to/test_data.csv"
 ```
 ### Pipeline Automation
-For a complete pipeline (MSA Generation -> MSTA construction and PSNS derivation -> ESM_repr Generation -> Folding Pathway Sampling -> Pathway Movie Generation), you can use the scripts provided in the `run/` directory.
+For a complete pipeline (MSA Generation -> MSTA Construction and PSNS Derivation -> ESM_repr Generation -> Folding Pathway Sampling -> Pathway Movie Generation), you can use the scripts provided in the `run/` directory.
 Example:
 ```bash
 bash run/PathDiffusion.sh ./example 1AB7_A
