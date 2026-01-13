@@ -77,6 +77,9 @@ bash run/PathDiffusion.sh ./example 1AB7_A
   <img src="example/gif/1OT8_A.gif" width="45%" />
 </div>
 
+## Acknowledgements
+
+We would like to express our gratitude to the authors of **ConfDiff** for their excellent open-source work. Our codebase is built upon and inspired by the [ConfDiff repository](https://github.com/bytedance/ConfDiff).
 
 ## Contact
 For questions or issues, please open an issue on this repository.
