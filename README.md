@@ -3,7 +3,7 @@
 ## Overview
 PathDiffusion is a software that automatically predicts protein folding pathways using evolution-guided diffusion models.
 
-It comprises two main modules: the first module focuses on preparing position-specific noise schedules (PSNS), and the second module generates the folding pathway using PSNS-guided diffusion models.
+It comprises two main modules: the first module focuses on preparing position-specific noise schedules (PSNS), and the second module employs PSNS-guided diffusion models to generate the folding pathway.
 
 <div align=center><img src="example/figure/framework.jpg" width="100%" height="100%"/></div>
 
