@@ -261,10 +261,7 @@ class GuidanceScoreNetwork(BaseScoreNetwork):
         batch_size, seq_len = aatype.shape[:2]
         base_dt = 1.0 / self.cfg.stage2_diffusion_steps
 
-        for step_num in tqdm(
-                range(self.cfg.starting_steps + self.cfg.base_steps, self.cfg.final_steps + self.cfg.base_steps)):
-            logger.info(f"step {step_num}")
-
+        for step_num in tqdm(range(self.cfg.starting_steps + self.cfg.base_steps, self.cfg.final_steps + self.cfg.base_steps)):
             stage1_pdb_dir = os.path.join(output_dir, "stage1")
             current_step_in_stage1 = step_num - self.cfg.base_steps
 
