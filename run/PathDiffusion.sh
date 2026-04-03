@@ -275,10 +275,10 @@ if [ ! -d "$STAGE2_DIR" ] || [ -z "$(ls -A "$STAGE2_DIR")" ]; then
         paths.guidance.uncond_ckpt="$TOOL_DIR/uncond_model.ckpt" \
         paths.output_dir="$TestDir" \
         data.dataset.test_gen_dataset.csv_path="$CSV_FILE" \
-        data.dataset.test_gen_dataset.num_samples=2 \
+        data.dataset.test_gen_dataset.num_samples=10 \
         model.score_network.cfg.clsfree_guidance_strength=0.95 \
-        model.score_network.cfg.starting_steps=150 \
-        model.score_network.cfg.final_steps=155 \
+        model.score_network.cfg.starting_steps=0 \
+        model.score_network.cfg.final_steps=300 \
         model.score_network.msta_dir="$TestDir/msta" \
         model.stage=2
 
