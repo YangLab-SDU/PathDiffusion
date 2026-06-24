@@ -15,11 +15,14 @@ cd PathDiffusion
 
 # create conda virtual environment
 conda env create -f env.yml
-conda activate PathDiffusion
+conda activate pathdiffusion
 
-# install openfold
+# check PyTorch first
+python -c "import torch; print('torch:', torch.__version__)"
+
+# install OpenFold after PyTorch is available
 git clone https://github.com/aqlaboratory/openfold.git
-pip install -e openfold
+pip install --no-build-isolation -e openfold
 ```
 
 ## Datasets Preparation
