@@ -1,2 +1,1 @@
-Download Trained Models:
-We host the pre-trained model checkpoints (conditional/unconditional) at http://yanglab.qd.sdu.edu.cn/PathDiffusion/
+Download Trained Models: http://yanglab.qd.sdu.edu.cn/PathDiffusion/
