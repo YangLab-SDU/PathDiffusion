@@ -56,18 +56,6 @@ python train.py \
 The detailed training configuration can be found in `settings/uncond_model.yaml`.
 
 ## Inference (Sampling)
-Use eval.py to generate protein structures. The inference pipeline typically uses Classifier-Free Guidance (CFG) combining both conditional and unconditional checkpoints.
-### Basic Command
-```bash
-python eval.py \
-    sampling=cfg_inference \
-    model.stage=1 \
-    paths.output_dir="./output/inference_result" \
-    paths.guidance.cond_ckpt="/path/to/cond_model.ckpt" \
-    paths.guidance.uncond_ckpt="/path/to/uncond_model.ckpt" \
-    model.score_network.msta_dir="/path/to/msta_dir" \
-    data.dataset.test_gen_dataset.csv_path="/path/to/test_data.csv"
-```
 ### Pipeline Automation
 For a complete pipeline (MSA Generation -> MSTA Construction and PSNS Derivation -> ESM_repr Generation -> Folding Pathway Sampling -> Pathway Movie Generation), you can use the scripts provided in the `run/` directory.
 Example:
