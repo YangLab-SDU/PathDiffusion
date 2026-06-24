@@ -15,7 +15,7 @@ PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 # 3. Input Arguments
 if [ "$#" -lt 2 ]; then
     echo "Usage: $0 <Output_Directory> <Protein_Name> [Dataset_Dir] [Model_Dir]"
-    echo "Example: $0 ./results 1abc /path/to/dataset /path/to/checkpoints"
+    echo "Example: $0 ./results 1abc /path/to/datasets /path/to/checkpoints"
     exit 1
 fi
 
@@ -24,7 +24,7 @@ ProteinName=$2
 
 # 4. External Data Paths (Allow override via arguments, otherwise use defaults)
 # Users should provide these, or you can set default relative paths
-DATASET_DIR=${3:-"$PROJECT_ROOT/dataset"}   # Default: dataset folder inside project
+DATASET_DIR=${3:-"$PROJECT_ROOT/datasets"}   # Default: datasets folder inside project
 TOOL_DIR=${4:-"$PROJECT_ROOT/model_weights"} # Default: model_weights folder inside project
 
 # 5. Derived Paths
@@ -44,7 +44,7 @@ echo "=========================================================="
 
 # Check if critical directories exist
 if [ ! -d "$DATASET_DIR" ]; then
-    echo "Error: Dataset directory not found at $DATASET_DIR"
+    echo "Error: Datasets directory not found at $DATASET_DIR"
     echo "Please provide the correct path as the 3rd argument."
     exit 1
 fi
