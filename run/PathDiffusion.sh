@@ -206,7 +206,7 @@ if [ ! -f "$ESM_REPR_CSV" ]; then
     NumGpu=1
 
     for GpuId in $(seq 0 $(($NumGpu-1))); do
-        CUDA_VISIBLE_DEVICES=$GpuId python3 -m run.pretrain_repr.esmfold.ESM_repr \
+        CUDA_VISIBLE_DEVICES=$GpuId python3 -m pretrain_repr.esmfold.ESM_repr \
             --input-csv-path "$CSV_FILE" \
             --output-dir "$TestDir/ESM_repr" \
             --esm-ckpt-fpath "$TOOL_DIR/esmfold_3B_v1.pt" \
