@@ -131,7 +131,7 @@ if [ "$USE_HMMER_PIPELINE" = true ]; then
             --mode hmmer \
             --input_file "$MSA_HMMER_FILE" \
             --threads_per_task $Threads \
-            --afdb_pdb_dir "$DATASET_DIR/AFDB/AFDB50_pdb" \
+            --afdb_pdb_dir "$DATASET_DIR/AFDB50_pdb" \
             --tmalign_path "$TOOL_DIR/TMalign_rmsd" \
             --output_dir "$RMSD_DIR"
 
@@ -141,7 +141,7 @@ if [ "$USE_HMMER_PIPELINE" = true ]; then
             --RMSD_path "$RMSD_DIR" \
             --seq_path "$TestDir/seq.fasta" \
             --msta_outpath "$MSTA_FILE" \
-            --afdb_pdb_dir "$DATASET_DIR/AFDB/AFDB50_pdb" \
+            --afdb_pdb_dir "$DATASET_DIR/AFDB50_pdb" \
             --nwalign_path "$TOOL_DIR/NWalign"
     fi
 
@@ -152,7 +152,7 @@ else
             --mode m8 \
             --input_file "$MSA_M8_FILE" \
             --threads_per_task $Threads \
-            --afdb_pdb_dir "$DATASET_DIR/AFDB/AFDB50_pdb" \
+            --afdb_pdb_dir "$DATASET_DIR/AFDB50_pdb" \
             --tmalign_path "$TOOL_DIR/TMalign_rmsd" \
             --output_dir "$RMSD_DIR"
 
@@ -162,7 +162,7 @@ else
             --RMSD_path "$RMSD_DIR" \
             --seq_path "$TestDir/seq.fasta" \
             --msta_outpath "$MSTA_FILE" \
-            --afdb_pdb_dir "$DATASET_DIR/AFDB/AFDB50_pdb" \
+            --afdb_pdb_dir "$DATASET_DIR/AFDB50_pdb" \
             --nwalign_path "$TOOL_DIR/NWalign"
     fi
 fi
