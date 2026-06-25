@@ -65,7 +65,7 @@ MSA_M8_FILE="$TestDir/msa/msa.m8"
 if [ ! -f "$MSA_M8_FILE" ]; then
     python "$SCRIPT_DIR/make_msa_mmseq.py" \
         --query_dir "$TestDir" \
-        --target_db "$DATASET_DIR/UniRef/AFDB50_fasta/target/target_afdb50" \
+        --target_db "$DATASET_DIR/AFDB50_fasta/target/target_afdb50" \
         --output_dir "$TestDir/msa" \
         --tmp_dir_base "$TestDir/msa" \
         --max_workers 1 \
