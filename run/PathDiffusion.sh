@@ -5,33 +5,42 @@
 # =============================================================================
 
 # 1. Get the absolute path of the directory where this script is located
-# This replaces: BaseDir=/storage/.../run
+# This script is expected to be located in: PathDiffusion/run/
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-# 2. Define Project Root (Assuming this script is in project_root/run/)
-# This replaces: SampleDir=/storage/.../PathDiffusion
+# 2. Define the project root directory
+# Assuming this script is in project_root/run/
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 
-# 3. Input Arguments
+# 3. Input arguments
 if [ "$#" -lt 2 ]; then
     echo "Usage: $0 <Output_Directory> <Protein_Name> [Dataset_Dir] [Model_Dir]"
-    echo "Example: $0 ./results 1abc /path/to/datasets /path/to/checkpoints"
+    echo "Example: $0 ./example 1AB7_A /path/to/dataset /path/to/PathDiffusion/run/model"
     exit 1
 fi
 
 OUTPUT_ROOT=$1
 ProteinName=$2
 
-# 4. External Data Paths (Allow override via arguments, otherwise use defaults)
-# Users should provide these, or you can set default relative paths
-DATASET_DIR=${3:-"$PROJECT_ROOT/datasets"}   # Default: datasets folder inside project
-TOOL_DIR=${4:-"$PROJECT_ROOT/model_weights"} # Default: model_weights folder inside project
+# 4. External data and model/tool paths
+# Dataset directory can be specified by the 3rd argument.
+# Model/tool directory can be specified by the 4th argument.
+# By default, model checkpoints and auxiliary tools are expected in run/model/.
+DATASET_DIR=${3:-"$PROJECT_ROOT/datasets"}
+TOOL_DIR=${4:-"$SCRIPT_DIR/model"}
 
-# 5. Derived Paths
+# 5. Convert output root to an absolute path to avoid nested relative paths
+mkdir -p "$OUTPUT_ROOT"
+OUTPUT_ROOT="$(realpath "$OUTPUT_ROOT")"
 TestDir="$OUTPUT_ROOT/$ProteinName"
+
 Threads=10
 
-# Print Configuration
+# 6. Move to project root and set PYTHONPATH
+cd "$PROJECT_ROOT" || exit 1
+export PYTHONPATH="$PROJECT_ROOT:$PYTHONPATH"
+
+# Print configuration
 echo "=========================================================="
 echo "Running PathDiffusion Pipeline"
 echo "Project Root : $PROJECT_ROOT"
@@ -44,15 +53,17 @@ echo "=========================================================="
 
 # Check if critical directories exist
 if [ ! -d "$DATASET_DIR" ]; then
-    echo "Error: Datasets directory not found at $DATASET_DIR"
+    echo "Error: Dataset directory not found at $DATASET_DIR"
     echo "Please provide the correct path as the 3rd argument."
     exit 1
 fi
+
 if [ ! -d "$TOOL_DIR" ]; then
-    echo "Error: Model directory not found at $TOOL_DIR"
+    echo "Error: Model/tool directory not found at $TOOL_DIR"
     echo "Please provide the correct path as the 4th argument."
     exit 1
 fi
+
 
 # =============================================================================
 # Step 1: Run MMseqs2 Search
