@@ -113,7 +113,7 @@ if [ "$USE_HMMER_PIPELINE" = true ]; then
     if [ ! -f "$MSA_HMMER_FILE" ]; then
         python3 "$SCRIPT_DIR/make_msa_hmmer.py" \
             --query_file "$TestDir/seq.fasta" \
-            --target_db "$DATASET_DIR/AFDB/afdb50.fasta" \
+            --target_db "$DATASET_DIR/AFDB50_fasta/target/afdb50.fasta" \
             --output_dir "$TestDir/msa" \
             --tmp_dir_base "$TestDir/msa" \
             --iterations 3 \
