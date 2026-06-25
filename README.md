@@ -17,11 +17,7 @@ cd PathDiffusion
 conda env create -f env.yml
 conda activate pathdiffusion
 
-# check PyTorch first
-python -c "import torch; print('torch:', torch.__version__)"
-
 # install OpenFold after PyTorch is available
-python -m pip install "setuptools<64" "pip<25" wheel ninja cmake packaging
 git clone https://github.com/aqlaboratory/openfold.git
 python -m pip install --no-build-isolation --no-use-pep517 -e openfold
 ```
