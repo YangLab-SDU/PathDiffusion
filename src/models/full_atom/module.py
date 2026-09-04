@@ -23,8 +23,6 @@ logger = hydra_utils.get_pylogger(__name__)
 
 
 class FullAtomLitModule(LightningModule):
-    # ... (__init__, setup, forward, sampling, training_step 等保持不变) ...
-
     def __init__(
         self,
         score_network,
